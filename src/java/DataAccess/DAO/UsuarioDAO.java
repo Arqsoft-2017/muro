@@ -25,12 +25,30 @@ public class UsuarioDAO {
         try {
             em.persist(usuario);
             em.getTransaction().commit();
+            em.close();
+            return usuario;
         } catch(Exception e) {
             e.printStackTrace();
             em.getTransaction().rollback();
-        } finally {
             em.close();
+            return null;
         }
-        return usuario;
     }    
+    
+    public Usuario delete(int usuarioID) {
+        EntityManager em = emf1.createEntityManager();
+        Usuario usuario = em.find(Usuario.class, usuarioID);
+        em.getTransaction().begin();
+        try {
+            em.remove(usuario);
+            em.getTransaction().commit();
+            em.close();
+            return usuario;
+        } catch(Exception e) {
+            e.printStackTrace();
+            em.getTransaction().rollback();
+            em.close();
+            return null;
+        }
+    }
 }

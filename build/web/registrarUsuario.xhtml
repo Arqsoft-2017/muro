@@ -13,18 +13,18 @@
                 <h2>Crear Cuenta</h2>   
                 <h:panelGrid columns="2">
                     <label>Nombre:</label>
-                    <h:inputText value="#{signinBean.name}" required="true" requiredMessage="¡El nombre es requerido!"/>
+                    <h:inputText value="#{registrarUsuarioBean.nombre}" required="true" requiredMessage="¡El nombre es requerido!"/>
                     <label>Nombre de usuario:</label>
-                    <h:inputText value="#{signinBean.nick}" required="true" requiredMessage="¡El nombre de usuario es requerido!"/>
+                    <h:inputText value="#{registrarUsuarioBean.nick}" required="true" requiredMessage="¡El nombre de usuario es requerido!"/>
                     <label>Correo:</label>
-                    <h:inputText value="#{signinBean.email}" required="true" requiredMessage="¡El correo es requerido!"/>
+                    <h:inputText value="#{registrarUsuarioBean.correo}" required="true" requiredMessage="¡El correo es requerido!"/>
                     <label>Contraseña:</label>
-                    <h:inputSecret value="#{signinBean.password}" required="true" requiredMessage="¡La contraseña es requerida!"/>                                                </h:panelGrid>
+                    <h:inputSecret value="#{registrarUsuarioBean.contrasena}" required="true" requiredMessage="¡La contraseña es requerida!"/>                                                </h:panelGrid>
                 <br/>
-                <h:commandButton action="#{signinBean.createAccount()}" value="Crear"/>
+                <h:commandButton action="#{registrarUsuarioBean.createAccount()}" value="Crear"/>
                 <br/><br/>
                 <label>Mensaje: </label>
-                <h:outputText value="#{signinBean.message}"/>
+                <h:outputText value="#{registrarUsuarioBean.message}"/>
                 <br/><br/>
                 <a href="index.xhtml">Inicio</a><br/>  
             </h:form>

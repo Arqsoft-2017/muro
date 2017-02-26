@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package Presentation.Bean;
-import BusinessLogic.Controller.HandleUser;
+import BusinessLogic.Controller.GestionarUsuario;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
@@ -15,29 +15,29 @@ import javax.faces.bean.ViewScoped;
  */
 @ManagedBean
 @ViewScoped
-public class signinBean {
-    private String name;
+public class RegistrarUsuarioBean {
+    private String nombre;
     private String nick;
-    private String email;
-    private String password;
+    private String correo;
+    private String contrasena;
     private String message;
     
-    public signinBean() {}
+    public RegistrarUsuarioBean() {}
 
-    public String getName() {
-        return name;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public String getEmail() {
-        return email;
+    public String getCorreo() {
+        return correo;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
     
     public String getNick() {
@@ -48,12 +48,12 @@ public class signinBean {
         this.nick = nick;
     }
 
-    public String getPassword() {
-        return password;
+    public String getContrasena() {
+        return contrasena;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
 
     public String getMessage() {
@@ -65,8 +65,8 @@ public class signinBean {
     }
 
     public void createAccount(){
-        HandleUser User = new HandleUser();
-        message = User.createUser(name, nick, password, email);
+        GestionarUsuario gu = new GestionarUsuario();
+        message = gu.crearUsuario(nombre, nick, contrasena, correo);
     }
     
 }

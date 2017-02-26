@@ -25,13 +25,13 @@ public class AutenticacionDAO {
         try {
             em.persist(autenticacion);
             em.getTransaction().commit();
+            em.close();
+            return autenticacion;                    
         } catch(Exception e) {
             e.printStackTrace();
-            em.getTransaction().rollback();
-        } finally {
             em.close();
+            return null;
         }
-        return autenticacion;
     }
     
 }
