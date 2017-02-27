@@ -14,6 +14,8 @@ import DataAccess.Entity.Autenticacion ;
  */
 public class GestionarUsuario {
     
+    public GestionarUsuario(){}
+    
     public String crearUsuario ( String nombre, String nick, String contrasena, String correo ) { 
         Usuario usuario = new Usuario();
         Autenticacion autenticacion = new Autenticacion();
@@ -26,7 +28,6 @@ public class GestionarUsuario {
         AutenticacionDAO autenticacionDAO = new AutenticacionDAO();
         
         Usuario usuarioE = usuarioDAO.persist(usuario);
-        
         
         if (usuarioE != null) {
             autenticacion.setAutenticacionId(usuarioE.getUsuarioId());

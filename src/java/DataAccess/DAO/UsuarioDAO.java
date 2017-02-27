@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package DataAccess.DAO;
+import DataAccess.Entity.Autenticacion;
 import java.io.*;
 import java.util.*;
 import DataAccess.Entity.Usuario;
@@ -16,6 +17,8 @@ import javax.persistence.Query;
  * @author wilman
  */
 public class UsuarioDAO {
+    
+    private String message;
     
     public EntityManagerFactory emf1= Persistence.createEntityManagerFactory("MuroPU");
     
@@ -50,5 +53,36 @@ public class UsuarioDAO {
             em.close();
             return null;
         }
+    }
+    
+    public Usuario buscarUsuario(String nick, String contrasena){
+        EntityManager em = emf1.createEntityManager();
+        Usuario usuario = null;
+        Autenticacion aut = null;
+        String peticionu = "select a from Usuario a where a.usuarioNick = '" + nick + "'";
+        Query q = em.createQuery(peticionu);
+        try {
+            usuario = (Usuario) q.getSingleResult();
+            String peticiona = "select a from Autenticacion a where a.autenticacionId = " + usuario.getUsuarioId();
+            q = em.createQuery(peticiona);
+            aut = (Autenticacion) q.getSingleResult();
+            if(!aut.getAutenticacionContrasena().equals(contrasena))
+                setmessage("Invalido");
+            else
+                setmessage("Encontrado");
+        } catch (Exception e){
+            setmessage("No encontrado");
+        } finally {
+            em.close();
+            return usuario;
+        }
+    }
+    
+    public String getmessage(){
+        return this.message;
+    }
+    
+    public void setmessage(String message){
+        this.message = message;
     }
 }

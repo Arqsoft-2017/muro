@@ -7,11 +7,11 @@
     <h:body> 
         <panel> 
             <h:form> 
-                <h1>INICIO</h1><hr/>   
+                <h1>BIENVENIDO</h1><hr/>   
                 <br/> 
-                <h:commandLink action="registrarUsuario" value="Registrarse"/> 
+                <h:commandButton action="#{registrarUsuarioBean.createAccount()}" value="Crear publicacion"/>
                 <br/><br/> 
-                <h:commandLink action="iniciarSesion" value="Iniciar sesion"/> 
+                <h:commandButton action="#{registrarUsuarioBean.createAccount()}" value="Cerrar sesion"/>
                 <br/> 
             </h:form> 
         </panel> 
