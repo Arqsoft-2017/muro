@@ -8,6 +8,8 @@ import DataAccess.DAO.UsuarioDAO ;
 import DataAccess.DAO.AutenticacionDAO ;
 import DataAccess.Entity.Usuario ; 
 import DataAccess.Entity.Autenticacion ; 
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 /**
  *
  * @author arqsoft2017i
@@ -45,5 +47,8 @@ public class GestionarUsuario {
         else 
             return "El usuario no pudo ser registrado.";        
     }
+    
+    
+    
     
 }

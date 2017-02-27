@@ -7,6 +7,7 @@ package BusinessLogic.Controller;
 
 import DataAccess.DAO.UsuarioDAO;
 import DataAccess.Entity.Usuario;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -17,12 +18,13 @@ public class IniciarSesion {
     public String iniciarSesion(String nick, String contrasena){
         UsuarioDAO usuarioDAO = new UsuarioDAO();
         Usuario usuario = usuarioDAO.buscarUsuario(nick,contrasena);
-        if(usuarioDAO.getmessage().equals("Encontrado"))
+        if(usuarioDAO.getmessage().equals("Encontrado")){
+            sesionUsuario us = new sesionUsuario();
+            us.setusuarioActual(usuario);
             return "Bienvenido " + usuario.getUsuarioNombre(); 
-        else if(usuarioDAO.getmessage().equals("Invalido"))
+        }else if(usuarioDAO.getmessage().equals("Invalido"))
             return "Contrasena invalida";
         else
             return "Usuario no encontrado" ; 
     }
-    
 }

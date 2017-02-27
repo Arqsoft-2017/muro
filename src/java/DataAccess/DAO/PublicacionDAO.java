@@ -5,7 +5,9 @@
  */
 package DataAccess.DAO;
 
+import BusinessLogic.Controller.sesionUsuario;
 import DataAccess.Entity.Publicacion;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -31,6 +33,21 @@ public class PublicacionDAO {
             em.close();
         }
         return publicacion;
+    }
+    
+    public List buscarpublicaciones(){
+        EntityManager em = emf1.createEntityManager();
+        List pub = null;
+        sesionUsuario us = new sesionUsuario();
+        String peticion = "select a from Publicacion a";// where a.publicacionUsuarioId = " + us.getusuarioActual();
+        Query q = em.createQuery(peticion);
+        try {
+            pub =  q.getResultList();
+        } catch (Exception e){
+        } finally {
+            em.close();
+            return pub;
+        }
     }
     
 }

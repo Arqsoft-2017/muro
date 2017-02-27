@@ -5,11 +5,11 @@
  */
 package Presentation.Bean;
 import BusinessLogic.Controller.IniciarSesion;
+import BusinessLogic.Controller.sesionUsuario;
 import javax.faces.application.ConfigurableNavigationHandler;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-
 
 /**
  *
@@ -50,10 +50,22 @@ public class iniciarSesionBean {
         this.message = message;
     }
     
+    public String getnombre(){
+        sesionUsuario us = new sesionUsuario();
+        return us.getusuarioNombre();
+    }
+    
     public void login(){
         IniciarSesion is = new IniciarSesion();
         message = is.iniciarSesion(nick, contrasena);
         if(message.contains("Bienvenido"))
             nav.performNavigation("principal.xhtml");
     }
+    
+    public void cerrarSesion(){
+        sesionUsuario us = new sesionUsuario();
+        us.setusuarioActual(null);
+        nav.performNavigation("index.xhtml");
+    }
+    
 }
