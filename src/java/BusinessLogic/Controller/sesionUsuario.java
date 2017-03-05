@@ -6,12 +6,16 @@
 package BusinessLogic.Controller;
 
 import DataAccess.Entity.Usuario;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 
 /**
  *
  * @author arqsoft2017i
  */
-public class sesionUsuario {
+@WebServlet("/sesionUsuario")
+public class sesionUsuario extends HttpServlet {
+    private static final long serialVersionUID = 1L;
     static private Usuario usuarioActual;
     
     public sesionUsuario(){}

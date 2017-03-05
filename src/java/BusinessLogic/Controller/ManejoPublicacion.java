@@ -10,35 +10,44 @@ import DataAccess.DAO.PublicacionDAO;
 import DataAccess.DAO.UsuarioDAO;
 import DataAccess.Entity.Publicacion;
 import DataAccess.Entity.Usuario;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 
 /**
  *
  * @author tania
  */public class ManejoPublicacion {
-    public String crearPublicacion(Date fecha, String contenido ){
+    public Publicacion crearPublicacion(Date fecha, String contenido, Integer id ){
         Publicacion publicacion = new Publicacion();
         Calendar calendar = Calendar.getInstance();
         java.util.Date currentDate = calendar.getTime();
         java.sql.Date date = new java.sql.Date(currentDate.getTime());
-        sesionUsuario sesion = new sesionUsuario();
-        Usuario usuario = sesion.getusuarioActual();
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        Usuario usuario = usuarioDAO.buscarUsuarioId(id);
         publicacion.setPublicacionFecha(date);
         publicacion.setPublicacionContenido(contenido);
         publicacion.setPublicacionUsuarioId(usuario);
         PublicacionDAO publiDAO = new PublicacionDAO();
         Publicacion publiE = publiDAO.persist(publicacion);
-        if( publiE != null){            
-                return "la publicacion " + publicacion.getPublicacionContenido() + " ha sido creado."; 
-        }else{
-                return "La publicacion no pudo ser creada." ;  
-            }
+        return publiE; 
     }
     
-    public List publicaciones(){
+    public List<Publicacion> publicaciones(Integer id){
         PublicacionDAO publiDAO = new PublicacionDAO();
-        return publiDAO.buscarpublicaciones();
+        List<Publicacion> p = (List<Publicacion>)publiDAO.buscarpublicaciones();
+        List<Publicacion> pubs = new ArrayList();
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        Usuario usuario = usuarioDAO.buscarUsuarioId(id);
+        // Recorrer lista y escoger publicaciones por id
+        for(Publicacion x: p){
+            if(x.getPublicacionUsuarioId().equals(usuario)){
+                pubs.add(x);
+            }
+        }
+        Collections.reverse(pubs);
+        return pubs;
     }
     
 }

@@ -18,7 +18,7 @@ public class GestionarUsuario {
     
     public GestionarUsuario(){}
     
-    public String crearUsuario ( String nombre, String nick, String contrasena, String correo ) { 
+    public Usuario crearUsuario ( String nombre, String nick, String contrasena, String correo ) { 
         Usuario usuario = new Usuario();
         Autenticacion autenticacion = new Autenticacion();
 
@@ -37,15 +37,15 @@ public class GestionarUsuario {
 
             Autenticacion autenticacionE = autenticacionDAO.persist(autenticacion);
             if (autenticacionE != null) {
-                return "El usuario ha sido registrado, su ID es " + usuario.getUsuarioId() + ".";
+                return usuarioE;
             }
             else {
                 usuarioDAO.delete(usuarioE.getUsuarioId());
-                return "El usuario no pudo ser registrado.";
+                return null;
             }
         }  
         else 
-            return "El usuario no pudo ser registrado.";        
+            return null;        
     }
     
     

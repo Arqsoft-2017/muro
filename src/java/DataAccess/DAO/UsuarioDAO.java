@@ -78,6 +78,13 @@ public class UsuarioDAO {
         }
     }
     
+    public Usuario buscarUsuarioId(Integer id){
+        EntityManager em = emf1.createEntityManager();
+        Usuario usuario = em.find(Usuario.class, id);
+        em.close();
+        return usuario;
+    }
+    
     public String getmessage(){
         return this.message;
     }
